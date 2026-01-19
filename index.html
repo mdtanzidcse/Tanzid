@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD TANZID - Network Engineer & Blockchain Researcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-cyan: #00f0ff;
+            --primary-blue: #0066ff;
+            --dark-bg: #0a0e1a;
+            --darker-bg: #050810;
+            --card-bg: rgba(15, 25, 45, 0.8);
+            --text-primary: #ffffff;
+            --text-secondary: #a0b0d0;
+            --accent-green: #00ff88;
+            --grid-color: rgba(0, 240, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Network Background */
+        .network-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; opacity: 0.3; pointer-events: none; }
+        .network-grid {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px; animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 50px); } }
+        .network-particles { position: absolute; width: 100%; height: 100%; overflow: hidden; }
+        .particle {
+            position: absolute; width: 3px; height: 3px; background: var(--primary-cyan);
+            border-radius: 50%; animation: float 15s infinite; box-shadow: 0 0 10px var(--primary-cyan);
+        }
+        @keyframes float { 0%, 100% { transform: translate(0, 0); opacity: 0; } 10%, 90% { opacity: 1; } 50% { transform: translate(100px, -100px); } }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px); z-index: 1000; padding: 1.5rem 0; border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        nav .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--primary-cyan); text-shadow: 0 0 20px rgba(0, 240, 255, 0.5); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 600; transition: all 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--primary-cyan); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--primary-cyan); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+        /* Hero Section */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding-top: 80px; }
+        .hero-content { text-align: center; animation: fadeInUp 1s ease-out; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-subtitle { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 1rem; font-weight: 300; }
+        .hero-title {
+            font-family: 'Orbitron', sans-serif; font-size: 5rem; font-weight: 900; margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow { from { filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5)); } to { filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.8)); } }
+        .hero-description { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 1rem; }
+        .hero-tags { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .tag { padding: 0.5rem 1.5rem; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-cyan); border-radius: 25px; color: var(--primary-cyan); font-weight: 600; }
+        .cta-button {
+            display: inline-block; margin-top: 2rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+            color: var(--dark-bg); text-decoration: none; font-weight: 700; border-radius: 50px; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+        }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 240, 255, 0.5); }
+
+        section { padding: 6rem 0; position: relative; }
+        .section-title {
+            font-family: 'Orbitron', sans-serif; font-size: 3rem; font-weight: 900; margin-bottom: 3rem; text-align: center;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .about-card { background: var(--card-bg); padding: 2rem; border-radius: 15px; border: 1px solid rgba(0, 240, 255, 0.2); backdrop-filter: blur(10px); transition: all 0.3s; }
+        .about-card:hover { transform: translateY(-10px); border-color: var(--primary-cyan); box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2); }
+        .about-card h3 { color: var(--primary-cyan); margin-bottom: 0.5rem; font-family: 'Orbitron', sans-serif; }
+        .about-card p { color: var(--text-secondary); }
+
+        /* Skills Section */
+        .skills-container { display: grid; gap: 3rem; }
+        .skill-category { background: var(--card-bg); padding: 2.5rem; border-radius: 15px; border: 1px solid rgba(0, 240, 255, 0.2); backdrop-filter: blur(10px); }
+        .skill-category h3 { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: var(--primary-cyan); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .skill-level { display: inline-block; padding: 0.3rem 1rem; background: rgba(0, 255, 136, 0.2); border: 1px solid var(--accent-green); border-radius: 20px; font-size: 0.9rem; color: var(--accent-green); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .skill-item { padding: 1rem; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--primary-cyan); border-radius: 5px; color: var(--text-secondary); transition: all 0.3s; }
+        .skill-item:hover { background: rgba(0, 240, 255, 0.1); transform: translateX(5px); }
+
+        /* Experience Timeline */
+        .timeline { position: relative; padding-left: 3rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px; background: linear-gradient(180deg, var(--primary-cyan), var(--primary-blue)); }
+        .timeline-item { position: relative; margin-bottom: 3rem; background: var(--card-bg); padding: 2rem; border-radius: 15px; border: 1px solid rgba(0, 240, 255, 0.2); backdrop-filter: blur(10px); }
+        .timeline-item::before { content: ''; position: absolute; left: -3.5rem; top: 2rem; width: 15px; height: 15px; background: var(--primary-cyan); border-radius: 50%; box-shadow: 0 0 20px var(--primary-cyan); }
+        .timeline-item h3 { font-family: 'Orbitron', sans-serif; color: var(--primary-cyan); margin-bottom: 0.5rem; }
+        .timeline-item .duration { color: var(--accent-green); font-weight: 600; margin-bottom: 1rem; }
+        .timeline-item p { color: var(--text-secondary); }
+
+        /* Contact Section */
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+        .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+        .contact-item { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; background: var(--card-bg); border-radius: 15px; border: 1px solid rgba(0, 240, 255, 0.2); backdrop-filter: blur(10px); transition: all 0.3s; }
+        .contact-item:hover { border-color: var(--primary-cyan); transform: translateX(10px); }
+        .contact-icon { width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .contact-details h4 { color: var(--primary-cyan); margin-bottom: 0.3rem; }
+        .contact-details p, .contact-details a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; }
+        .contact-details a:hover { color: var(--primary-cyan); }
+
+        .contact-form { background: var(--card-bg); padding: 2.5rem; border-radius: 15px; border: 1px solid rgba(0, 240, 255, 0.2); backdrop-filter: blur(10px); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--primary-cyan); font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 1rem; background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 10px; color: var(--text-primary); font-family: 'Sora', sans-serif; transition: all 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-cyan); box-shadow: 0 0 20px rgba(0, 240, 255, 0.2); }
+        .form-group textarea { resize: vertical; min-height: 150px; }
+        .submit-btn { width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue)); color: var(--dark-bg); border: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3); }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 240, 255, 0.5); }
+
+        footer { background: var(--darker-bg); padding: 2rem 0; text-align: center; border-top: 1px solid rgba(0, 240, 255, 0.2); }
+        footer p { color: var(--text-secondary); }
+        .social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; }
+        .social-links a { color: var(--primary-cyan); font-size: 1.5rem; transition: all 0.3s; text-decoration: none; }
+        .social-links a:hover { transform: translateY(-5px); filter: drop-shadow(0 5px 10px var(--primary-cyan)); }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 3rem; }
+            .contact-container { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+        }
+
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+
+<body>
+    <div class="network-bg">
+        <div class="network-grid"></div>
+        <div class="network-particles" id="particles"></div>
+    </div>
+
+    <nav>
+        <div class="container">
+            <div class="logo">MT</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">Hello! I am</p>
+                <h1 class="hero-title">MD TANZID</h1>
+                <p class="hero-description">Network Engineer & Blockchain Researcher_</p>
+                <div class="hero-tags">
+                    <span class="tag">Network Infrastructure</span>
+                    <span class="tag">Blockchain Systems</span>
+                </div>
+                <a href="#contact" class="cta-button">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-grid">
+                <div class="about-card fade-in">
+                    <h3>Age</h3>
+                    <p>25 Years</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h3>Nationality</h3>
+                    <p>Bangladeshi</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h3>Experience</h3>
+                    <p>1 Year Professional</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h3>Languages</h3>
+                    <p>English, Bangla</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h3>Attributes</h3>
+                    <p>Proactive, Technical, Leader</p>
+                </div>
+                <div class="about-card fade-in">
+                    <h3>Location</h3>
+                    <p>Dhaka, Bangladesh</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title fade-in">Technical Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category fade-in">
+                    <h3><span class="skill-level">Core Expertise</span> Advanced Networking</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">ISP Infrastructure Management</div>
+                        <div class="skill-item">MikroTik RouterOS (Winbox)</div>
+                        <div class="skill-item">Fiber-to-the-Home (FTTH) Management</div>
+                        <div class="skill-item">NOC Monitoring & Incident Handling</div>
+                        <div class="skill-item">IP Addressing & Subnetting (IPv4/IPv6)</div>
+                        <div class="skill-item">Bandwidth Management & Optimization</div>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <h3><span class="skill-level">Specialized</span> Security & Blockchain</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Hyperledger Fabric Framework</div>
+                        <div class="skill-item">Smart Contract Development</div>
+                        <div class="skill-item">Ethical Hacking (Kali Linux)</div>
+                        <div class="skill-item">Vulnerability Analysis & Pentesting</div>
+                        <div class="skill-item">VPN & Network Security Implementation</div>
+                        <div class="skill-item">Intrusion Detection/Prevention (IDS/IPS)</div>
+                    </div>
+                </div>
+
+                <div class="skill-category fade-in">
+                    <h3><span class="skill-level">TOOLS</span> Engineering Arsenal</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">MikroTik Winbox</div>
+                        <div class="skill-item">Cisco Packet Tracer</div>
+                        <div class="skill-item">Wireshark Network Analyzer</div>
+                        <div class="skill-item">Virtualization (Hyper-V, VMware)</div>
+                        <div class="skill-item">Linux Terminal & Putty/SSH</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" style="background: rgba(0, 240, 255, 0.02);">
+        <div class="container">
+            <h2 class="section-title fade-in">Academic Research</h2>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <h3>Blockchain-IoT Integrated Poultry Supply Chain Traceability</h3>
+                    <p class="duration">Primary Researcher</p>
+                    <p>Designed a decentralized framework using <strong>Hyperledger Fabric</strong> and <strong>IoT sensors</strong> to ensure transparency and food safety in the poultry supply chain.</p>
+                    <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
+                        <li>Implemented Smart Contracts for automated regulatory compliance.</li>
+                        <li>Engineered real-time tracking for farm conditions (Temp/Humidity).</li>
+                        <li>Developed a secure QR-based verification system for consumers.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title fade-in">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <h3>Network Engineer</h3>
+                    <p style="color: var(--primary-cyan); font-weight: bold;">Digi Jadoo Broadband Limited</p>
+                    <p class="duration">1 Year Experience</p>
+                    <p>Managing high-capacity ISP infrastructure and maintaining core MikroTik/Cisco environments. Responsible for network troubleshooting and ensuring seamless internet delivery for broadband users.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title fade-in">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <h3>BSc in Computer Science & Engineering</h3>
+                    <p style="color: var(--primary-cyan); font-weight: bold;">Southeast University</p>
+                    <p class="duration">Running (Final Year)</p>
+                    <p>Focused on Network Security and Decentralized Systems. Developing a blockchain framework for industrial IoT security.</p>
+                </div>
+                <div class="timeline-item fade-in">
+                    <h3>Diploma in Engineering (Computer Technology)</h3>
+                    <p style="color: var(--primary-cyan); font-weight: bold;">National Institute of Engineering & Technology</p>
+                    <p class="duration">CGPA: 3.84/4.00</p>
+                    <p>Graduated with a strong foundation in computer hardware and network fundamentals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:mdtanzid.cse@gmail.com">mdtanzid.cse@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p><a href="tel:+8801812083540">+88 01812083540</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Dhaka, Bangladesh</p>
+                        </div>
+                    </div>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-details">
+                            <h4>LinkedIn</h4>
+                            <p><a href="https://www.linkedin.com/in/md-tanzid" target="_blank">Md Tanzid</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form fade-in">
+                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="10d803f1-649b-41be-8d00-5a611fe372ca">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 MD TANZID. All Rights Reserved.</p>
+            <div class="social-links">
+                <a href="mailto:mdtanzid.cse@gmail.com" title="Email">📧</a>
+                <a href="https://www.linkedin.com/in/md-tanzid" target="_blank" title="LinkedIn">💼</a>
+                <a href="tel:+8801812083540" title="Phone">📱</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Particles animation
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>
