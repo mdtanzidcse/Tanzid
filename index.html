@@ -95,13 +95,18 @@
         }
         @keyframes glow { from { filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.5)); } to { filter: drop-shadow(0 0 40px rgba(0, 240, 255, 0.8)); } }
         .hero-description { font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 1rem; }
-        .hero-tags { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .hero-tags { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
         .tag { padding: 0.5rem 1.5rem; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-cyan); border-radius: 25px; color: var(--primary-cyan); font-weight: 600; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
         .cta-button {
-            display: inline-block; margin-top: 2rem; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
+            display: inline-block; padding: 1rem 2.5rem; background: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
             color: var(--dark-bg); text-decoration: none; font-weight: 700; border-radius: 50px; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
         }
         .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 240, 255, 0.5); }
+        .cta-button.secondary {
+            background: transparent; border: 2px solid var(--primary-cyan); color: var(--primary-cyan); box-shadow: none;
+        }
+        .cta-button.secondary:hover { background: rgba(0, 240, 255, 0.1); }
 
         section { padding: 6rem 0; position: relative; }
         .section-title {
@@ -130,6 +135,15 @@
         .timeline-item h3 { font-family: 'Orbitron', sans-serif; color: var(--primary-cyan); margin-bottom: 0.5rem; }
         .timeline-item .duration { color: var(--accent-green); font-weight: 600; margin-bottom: 1rem; }
         .timeline-item p { color: var(--text-secondary); }
+
+        .btn-tag {
+            display: inline-flex; align-items: center; gap: 6px; padding: 0.45rem 1.2rem;
+            background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-cyan); border-radius: 20px;
+            color: var(--primary-cyan); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.3s;
+        }
+        .btn-tag:hover { background: var(--primary-cyan); color: var(--dark-bg); transform: translateY(-2px); }
+        .btn-tag.secondary { border-color: rgba(160, 176, 208, 0.4); color: var(--text-secondary); }
+        .btn-tag.secondary:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-primary); }
 
         .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
         .contact-info { display: flex; flex-direction: column; gap: 2rem; }
@@ -199,12 +213,17 @@
                 </div>
                 <p class="hero-subtitle">Hello! I am</p>
                 <h1 class="hero-title">MD TANZID</h1>
-                <p class="hero-description">Network Engineer, Blockchain & Newtork secruity Researcher_</p>
+                <p class="hero-description">Network Engineer, Blockchain & Network Security Researcher</p>
                 <div class="hero-tags">
                     <span class="tag">Network Infrastructure</span>
-                    <span class="tag">Blockchain Systems</span>
+                    <span class="tag">Hyperledger Fabric</span>
+                    <span class="tag">IoT Supply Chain</span>
+                    <span class="tag">Federated Learning</span>
                 </div>
-                <a href="#contact" class="cta-button">Get In Touch</a>
+                <div class="hero-buttons">
+                    <a href="#contact" class="cta-button">Get In Touch</a>
+                    <a href="https://scholar.google.com/citations?user=sJVHpCUAAAAJ&hl=en" target="_blank" class="cta-button secondary">Google Scholar</a>
+                </div>
             </div>
         </div>
     </section>
@@ -272,9 +291,9 @@
                 <div class="skill-category fade-in">
                     <h3><span class="skill-level">TOOLS</span> Engineering Arsenal</h3>
                     <div class="skills-grid">
-                         <div class="skill-item">Junipar Router</div>
+                        <div class="skill-item">Juniper Router</div>
                         <div class="skill-item">MikroTik Router</div>
-                        <div class="skill-item">Cisco Switch </div>
+                        <div class="skill-item">Cisco Switch</div>
                         <div class="skill-item">Wireshark Network Analyzer</div>
                         <div class="skill-item">Virtualization (Hyper-V, VMware)</div>
                         <div class="skill-item">Linux Terminal & Putty/SSH</div>
@@ -289,28 +308,34 @@
             <h2 class="section-title fade-in">Academic Research</h2>
             <div class="timeline">
                 <div class="timeline-item fade-in">
-                    <h3>Blockchain-IoT Integrated Poultry Supply Chain Traceability, Federated Learning</h3>
+                    <h3>Blockchain-IoT Integrated Poultry Supply Chain Traceability & Federated Learning</h3>
                     <p class="duration">Primary Researcher</p>
                     <p>Designed a decentralized framework using <strong>Hyperledger Fabric</strong> and <strong>IoT sensors</strong> to ensure transparency and food safety in the poultry supply chain.</p>
                     <ul style="color: var(--text-secondary); padding-left: 1.5rem; margin-top: 1rem;">
                         <li>Implemented Smart Contracts for automated regulatory compliance.</li>
                         <li>Engineered real-time tracking for farm conditions (Temp/Humidity).</li>
                         <li>Developed a secure QR-based verification system for consumers.</li>
-                        <li>Developed a secure Model for medical Data secruity.</li>
+                        <li>Developed a secure decentralized model for medical data security.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-<!-- ================= PUBLICATIONS SECTION ================= -->
+
+    <!-- ================= PUBLICATIONS SECTION ================= -->
     <section id="publications">
         <div class="container">
             <h2 class="section-title fade-in">Publications</h2>
+            <div style="text-align: center; margin-bottom: 2.5rem;" class="fade-in">
+                <a href="https://scholar.google.com/citations?user=sJVHpCUAAAAJ&hl=en" target="_blank" class="btn-tag">
+                    🎓 View Full Profile on Google Scholar
+                </a>
+            </div>
             <div class="timeline">
 
                 <!-- Publication 1: MDPI Journal (Q2) -->
                 <div class="timeline-item fade-in">
-                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
                         <span style="padding: 2px 10px; background: rgba(0, 255, 136, 0.2); border: 1px solid var(--accent-green); border-radius: 12px; font-size: 0.75rem; color: var(--accent-green); font-weight: 600;">Journal Article</span>
                         <span style="padding: 2px 10px; background: rgba(0, 240, 255, 0.2); border: 1px solid var(--primary-cyan); border-radius: 12px; font-size: 0.75rem; color: var(--primary-cyan); font-weight: 600;">Scopus Q2</span>
                     </div>
@@ -323,15 +348,18 @@
                         Special Issue: IoT, AI, and Blockchain: Applications, Security, and Perspectives. Proposes an end-to-end decentralized framework for Halal food safety, real-time IoT monitoring, and automated recall.
                     </p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://doi.org/10.3390/info17090875" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 0.4rem 1.2rem; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-cyan); border-radius: 20px; color: var(--primary-cyan); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s;">
-                            📄 View Paper (DOI)
+                        <a href="https://doi.org/10.3390/info17090875" target="_blank" class="btn-tag">
+                            📄 View Paper (MDPI DOI)
+                        </a>
+                        <a href="https://github.com/mdtanzidcse/hyperledger-halal-contract-chaincode" target="_blank" class="btn-tag secondary">
+                            💻 GitHub Chaincode
                         </a>
                     </div>
                 </div>
 
                 <!-- Publication 2: IEEE ICCSC (Lead/1st Author) -->
                 <div class="timeline-item fade-in">
-                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
                         <span style="padding: 2px 10px; background: rgba(0, 255, 136, 0.2); border: 1px solid var(--accent-green); border-radius: 12px; font-size: 0.75rem; color: var(--accent-green); font-weight: 600;">IEEE Conference</span>
                         <span style="padding: 2px 10px; background: rgba(0, 102, 255, 0.2); border: 1px solid var(--primary-blue); border-radius: 12px; font-size: 0.75rem; color: #7cb5ff; font-weight: 600;">First Author</span>
                     </div>
@@ -344,7 +372,7 @@
                         Published in IEEE Xplore. Implements automated regulatory compliance and Shariah-compliant integrity verification through permissioned smart contracts.
                     </p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://doi.org/10.1109/ICCSC71566.2026.11650360" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 0.4rem 1.2rem; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-cyan); border-radius: 20px; color: var(--primary-cyan); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s;">
+                        <a href="https://doi.org/10.1109/ICCSC71566.2026.11650360" target="_blank" class="btn-tag">
                             📄 IEEE Xplore (DOI)
                         </a>
                     </div>
@@ -352,7 +380,7 @@
 
                 <!-- Publication 3: IEEE QPAIN -->
                 <div class="timeline-item fade-in">
-                    <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
                         <span style="padding: 2px 10px; background: rgba(0, 255, 136, 0.2); border: 1px solid var(--accent-green); border-radius: 12px; font-size: 0.75rem; color: var(--accent-green); font-weight: 600;">IEEE Conference</span>
                     </div>
                     <h3 style="font-size: 1.25rem; line-height: 1.4;">Bangla Feminism Sentiment Detection on Social Media Using Transformer-Based Deep Learning Models</h3>
@@ -364,7 +392,7 @@
                         Published in IEEE Xplore. Evaluates fine-tuned transformer architectures (BanglaBERT-BUET, XLM-R, RemBERT) achieving 94.94% accuracy in social sentiment analysis.
                     </p>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="https://doi.org/10.1109/QPAIN69676.2026.11546313" target="_blank" style="display: inline-flex; align-items: center; gap: 5px; padding: 0.4rem 1.2rem; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--primary-cyan); border-radius: 20px; color: var(--primary-cyan); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s;">
+                        <a href="https://doi.org/10.1109/QPAIN69676.2026.11546313" target="_blank" class="btn-tag">
                             📄 IEEE Xplore (DOI)
                         </a>
                     </div>
@@ -373,6 +401,7 @@
             </div>
         </div>
     </section>
+
     <section id="experience">
         <div class="container">
             <h2 class="section-title fade-in">Professional Experience</h2>
@@ -432,7 +461,7 @@
                 </div>
                 <div class="about-card fade-in">
                     <h3>Event Leadership</h3>
-                    <p style="color: var(--accent-green); font-weight: 600; margin-bottom: 0.5rem;">Executive Member (2023) <br> Senior executive Member (2024))</p>
+                    <p style="color: var(--accent-green); font-weight: 600; margin-bottom: 0.5rem;">Executive Member (2023) <br> Senior Executive Member (2024)</p>
                     <p>Actively involved in event management, contributing to the planning and execution of various club programs.</p>
                 </div>
             </div>
@@ -472,6 +501,20 @@
                             <p><a href="https://www.linkedin.com/in/md-tanzid" target="_blank">Md Tanzid</a></p>
                         </div>
                     </div>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">🐙</div>
+                        <div class="contact-details">
+                            <h4>GitHub</h4>
+                            <p><a href="https://github.com/mdtanzidcse" target="_blank">github.com/mdtanzidcse</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item fade-in">
+                        <div class="contact-icon">🎓</div>
+                        <div class="contact-details">
+                            <h4>Google Scholar</h4>
+                            <p><a href="https://scholar.google.com/citations?user=sJVHpCUAAAAJ&hl=en" target="_blank">Md Tanzid Profile</a></p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="contact-form fade-in">
@@ -502,6 +545,8 @@
             <div class="social-links">
                 <a href="mailto:mdtanzid.cse@gmail.com" title="Email">📧</a>
                 <a href="https://www.linkedin.com/in/md-tanzid" target="_blank" title="LinkedIn">💼</a>
+                <a href="https://github.com/mdtanzidcse" target="_blank" title="GitHub">🐙</a>
+                <a href="https://scholar.google.com/citations?user=sJVHpCUAAAAJ&hl=en" target="_blank" title="Google Scholar">🎓</a>
                 <a href="tel:+8801812083540" title="Phone">📱</a>
             </div>
         </div>
